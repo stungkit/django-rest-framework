@@ -239,10 +239,6 @@
                   </li>
                   
                   <li >
-                    <a href="topics/api-clients/">API Clients</a>
-                  </li>
-                  
-                  <li >
                     <a href="topics/internationalization/">Internationalization</a>
                   </li>
                   
@@ -291,6 +287,14 @@
                   
                   <li >
                     <a href="community/release-notes/">Release Notes</a>
+                  </li>
+                  
+                  <li >
+                    <a href="community/3.16-announcement/">3.16 Announcement</a>
+                  </li>
+                  
+                  <li >
+                    <a href="community/3.15-announcement/">3.15 Announcement</a>
                   </li>
                   
                   <li >
@@ -532,7 +536,7 @@
 <p>Django REST framework is a powerful and flexible toolkit for building Web APIs.</p>
 <p>Some reasons you might want to use REST framework:</p>
 <ul>
-<li>The <a href="https://restframework.herokuapp.com/">Web browsable API</a> is a huge usability win for your developers.</li>
+<li>The Web browsable API is a huge usability win for your developers.</li>
 <li><a href="api-guide/authentication/">Authentication policies</a> including packages for <a href="api-guide/authentication/#django-rest-framework-oauth">OAuth1a</a> and <a href="api-guide/authentication/#django-oauth-toolkit">OAuth2</a>.</li>
 <li><a href="api-guide/serializers/">Serialization</a> that supports both <a href="api-guide/serializers#modelserializer">ORM</a> and <a href="api-guide/serializers#serializers">non-ORM</a> data sources.</li>
 <li>Customizable all the way down - just use <a href="api-guide/views#function-based-views">regular function-based views</a> if you don't need the <a href="api-guide/generic-views/">more</a> <a href="api-guide/viewsets/">powerful</a> <a href="api-guide/routers/">features</a>.</li>
@@ -554,24 +558,26 @@ continued development by <strong><a href="community/funding/">signing up for a p
     <li><a href="https://posthog.com?utm_source=DRF&utm_medium=sponsor&utm_campaign=DRF_sponsorship" style="background-image: url(https://fund-rest-framework.s3.amazonaws.com/135996800-d49fe024-32d9-441a-98d9-4c7596287a67.png)">PostHog</a></li>
     <li><a href="https://cryptapi.io" style="background-image: url(https://fund-rest-framework.s3.amazonaws.com/cryptapi.png)">CryptAPI</a></li>
     <li><a href="https://www.fezto.xyz/?utm_source=DjangoRESTFramework" style="background-image: url(https://fund-rest-framework.s3.amazonaws.com/fezto.png)">FEZTO</a></li>
+    <li><a href="https://www.svix.com/?utm_source=django-REST&utm_medium=sponsorship" style="background-image: url(https://fund-rest-framework.s3.amazonaws.com/svix.png)">Svix</a></li>
+    <li><a href="https://zuplo.link/django-web" style="background-image: url(https://fund-rest-framework.s3.amazonaws.com/zuplo.png)">Zuplo</a></li>
 </ul>
 <div style="clear: both; padding-bottom: 20px;"></div>
 
-<p><em>Many thanks to all our <a href="https://fund.django-rest-framework.org/topics/funding/#our-sponsors">wonderful sponsors</a>, and in particular to our premium backers, <a href="https://getsentry.com/welcome/">Sentry</a>, <a href="https://getstream.io/?utm_source=DjangoRESTFramework&amp;utm_medium=Webpage_Logo_Ad&amp;utm_content=Developer&amp;utm_campaign=DjangoRESTFramework_Jan2022_HomePage">Stream</a>, <a href="https://www.spacinov.com/">Spacinov</a>, <a href="https://retool.com/?utm_source=djangorest&amp;utm_medium=sponsorship">Retool</a>, <a href="https://bit.io/jobs?utm_source=DRF&amp;utm_medium=sponsor&amp;utm_campaign=DRF_sponsorship">bit.io</a>, <a href="https://posthog.com?utm_source=DRF&amp;utm_medium=sponsor&amp;utm_campaign=DRF_sponsorship">PostHog</a>, <a href="https://cryptapi.io">CryptAPI</a>, and <a href="https://www.fezto.xyz/?utm_source=DjangoRESTFramework">FEZTO</a>.</em></p>
+<p><em>Many thanks to all our <a href="https://fund.django-rest-framework.org/topics/funding/#our-sponsors">wonderful sponsors</a>, and in particular to our premium backers, <a href="https://getsentry.com/welcome/">Sentry</a>, <a href="https://getstream.io/?utm_source=DjangoRESTFramework&amp;utm_medium=Webpage_Logo_Ad&amp;utm_content=Developer&amp;utm_campaign=DjangoRESTFramework_Jan2022_HomePage">Stream</a>, <a href="https://www.spacinov.com/">Spacinov</a>, <a href="https://retool.com/?utm_source=djangorest&amp;utm_medium=sponsorship">Retool</a>, <a href="https://bit.io/jobs?utm_source=DRF&amp;utm_medium=sponsor&amp;utm_campaign=DRF_sponsorship">bit.io</a>, <a href="https://posthog.com?utm_source=DRF&amp;utm_medium=sponsor&amp;utm_campaign=DRF_sponsorship">PostHog</a>, <a href="https://cryptapi.io">CryptAPI</a>, <a href="https://www.fezto.xyz/?utm_source=DjangoRESTFramework">FEZTO</a>, <a href="https://www.svix.com/?utm_source=django-REST&amp;utm_medium=sponsorship">Svix</a>, , and <a href="https://zuplo.link/django-web">Zuplo</a>.</em></p>
 <hr />
 <h2 id="requirements"><a class="toclink" href="#requirements">Requirements</a></h2>
 <p>REST framework requires the following:</p>
 <ul>
-<li>Python (3.6, 3.7, 3.8, 3.9, 3.10)</li>
-<li>Django (2.2, 3.0, 3.1, 3.2, 4.0, 4.1)</li>
+<li>Django (4.2, 5.0, 5.1, 5.2)</li>
+<li>Python (3.9, 3.10, 3.11, 3.12, 3.13)</li>
 </ul>
 <p>We <strong>highly recommend</strong> and only officially support the latest patch release of
 each Python and Django series.</p>
 <p>The following packages are optional:</p>
 <ul>
 <li><a href="https://pypi.org/project/PyYAML/">PyYAML</a>, <a href="https://pypi.org/project/uritemplate/">uritemplate</a> (5.1+, 3.0.0+) - Schema generation support.</li>
-<li><a href="https://pypi.org/project/Markdown/">Markdown</a> (3.0.0+) - Markdown support for the browsable API.</li>
-<li><a href="https://pypi.org/project/Pygments/">Pygments</a> (2.4.0+) - Add syntax highlighting to Markdown processing.</li>
+<li><a href="https://pypi.org/project/Markdown/">Markdown</a> (3.3.0+) - Markdown support for the browsable API.</li>
+<li><a href="https://pypi.org/project/Pygments/">Pygments</a> (2.7.0+) - Add syntax highlighting to Markdown processing.</li>
 <li><a href="https://pypi.org/project/django-filter/">django-filter</a> (1.0.1+) - Filtering support.</li>
 <li><a href="https://github.com/django-guardian/django-guardian">django-guardian</a> (1.1.1+) - Object level permissions support.</li>
 </ul>
@@ -643,14 +649,13 @@ urlpatterns = [
 <p>Can't wait to get started? The <a href="tutorial/quickstart/">quickstart guide</a> is the fastest way to get up and running, and building APIs with REST framework.</p>
 <h2 id="development"><a class="toclink" href="#development">Development</a></h2>
 <p>See the <a href="community/contributing/">Contribution guidelines</a> for information on how to clone
-the repository, run the test suite and contribute changes back to REST
+the repository, run the test suite and help maintain the code base of REST
 Framework.</p>
 <h2 id="support"><a class="toclink" href="#support">Support</a></h2>
-<p>For support please see the <a href="https://groups.google.com/forum/?fromgroups#!forum/django-rest-framework">REST framework discussion group</a>, try the  <code>#restframework</code> channel on <code>irc.libera.chat</code>, or raise a  question on <a href="https://stackoverflow.com/">Stack Overflow</a>, making sure to include the <a href="https://stackoverflow.com/questions/tagged/django-rest-framework">'django-rest-framework'</a> tag.</p>
+<p>For support please see the <a href="https://groups.google.com/forum/?fromgroups#!forum/django-rest-framework">REST framework discussion group</a>, try the <code>#restframework</code> channel on <code>irc.libera.chat</code>, or raise a question on <a href="https://stackoverflow.com/">Stack Overflow</a>, making sure to include the <a href="https://stackoverflow.com/questions/tagged/django-rest-framework">'django-rest-framework'</a> tag.</p>
 <p>For priority support please sign up for a <a href="https://fund.django-rest-framework.org/topics/funding/">professional or premium sponsorship plan</a>.</p>
 <h2 id="security"><a class="toclink" href="#security">Security</a></h2>
-<p>Security issues are handled under the supervision of the <a href="https://www.djangoproject.com/foundation/teams/#security-team">Django security team</a>.</p>
-<p><strong>Please report security issues by emailing security@djangoproject.com</strong>.</p>
+<p><strong>Please report security issues by emailing security@encode.io</strong>.</p>
 <p>The project maintainers will then work with you to resolve any issues where required, prior to any public disclosure.</p>
 <h2 id="license"><a class="toclink" href="#license">License</a></h2>
 <p>Copyright © 2011-present, <a href="https://www.encode.io/">Encode OSS Ltd</a>.

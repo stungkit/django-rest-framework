@@ -239,10 +239,6 @@
                   </li>
                   
                   <li >
-                    <a href="../../topics/api-clients/">API Clients</a>
-                  </li>
-                  
-                  <li >
                     <a href="../../topics/internationalization/">Internationalization</a>
                   </li>
                   
@@ -291,6 +287,14 @@
                   
                   <li >
                     <a href="../release-notes/">Release Notes</a>
+                  </li>
+                  
+                  <li >
+                    <a href="../3.16-announcement/">3.16 Announcement</a>
+                  </li>
+                  
+                  <li >
+                    <a href="../3.15-announcement/">3.15 Announcement</a>
                   </li>
                   
                   <li >
@@ -429,6 +433,10 @@
                       <a href="#existing-third-party-packages">Existing Third Party Packages</a>
                     </li>
                   
+                    <li>
+                      <a href="#async-support">Async Support</a>
+                    </li>
+                  
                 
 
                   <div class="promo">
@@ -463,13 +471,17 @@
 <h4 id="adding-to-the-django-rest-framework-grid"><a class="toclink" href="#adding-to-the-django-rest-framework-grid">Adding to the Django REST framework grid</a></h4>
 <p>We suggest adding your package to the <a href="https://www.djangopackages.com/grids/g/django-rest-framework/">REST Framework</a> grid on Django Packages.</p>
 <h4 id="adding-to-the-django-rest-framework-docs"><a class="toclink" href="#adding-to-the-django-rest-framework-docs">Adding to the Django REST framework docs</a></h4>
-<p>Create a <a href="https://github.com/encode/django-rest-framework/compare">Pull Request</a> or <a href="https://github.com/encode/django-rest-framework/issues/new">Issue</a> on GitHub, and we'll add a link to it from the main REST framework documentation. You can add your package under <strong>Third party packages</strong> of the API Guide section that best applies, like <a href="../../api-guide/authentication/">Authentication</a> or <a href="../../api-guide/permissions/">Permissions</a>. You can also link your package under the <a href="../topics/third-party-packages/#existing-third-party-packages">Third Party Packages</a> section.</p>
+<p>Create a <a href="https://github.com/encode/django-rest-framework/compare">Pull Request</a> on GitHub, and we'll add a link to it from the main REST framework documentation. You can add your package under <strong>Third party packages</strong> of the API Guide section that best applies, like <a href="../../api-guide/authentication/">Authentication</a> or <a href="../../api-guide/permissions/">Permissions</a>. You can also link your package under the <a href="#existing-third-party-packages">Third Party Packages</a> section.</p>
 <h4 id="announce-on-the-discussion-group"><a class="toclink" href="#announce-on-the-discussion-group">Announce on the discussion group.</a></h4>
 <p>You can also let others know about your package through the <a href="https://groups.google.com/forum/#!forum/django-rest-framework">discussion group</a>.</p>
 <h2 id="existing-third-party-packages"><a class="toclink" href="#existing-third-party-packages">Existing Third Party Packages</a></h2>
 <p>Django REST Framework has a growing community of developers, packages, and resources.</p>
 <p>Check out a grid detailing all the packages and ecosystem around Django REST Framework at <a href="https://www.djangopackages.com/grids/g/django-rest-framework/">Django Packages</a>.</p>
-<p>To submit new content, <a href="https://github.com/encode/django-rest-framework/issues/new">open an issue</a> or <a href="https://github.com/encode/django-rest-framework/compare">create a pull request</a>.</p>
+<p>To submit new content, <a href="https://github.com/encode/django-rest-framework/compare">create a pull request</a>.</p>
+<h2 id="async-support"><a class="toclink" href="#async-support">Async Support</a></h2>
+<ul>
+<li><a href="https://github.com/em1208/adrf">adrf</a> - Async support, provides async Views, ViewSets, and Serializers.</li>
+</ul>
 <h3 id="authentication"><a class="toclink" href="#authentication">Authentication</a></h3>
 <ul>
 <li><a href="https://github.com/juanriaza/django-rest-framework-digestauth">djangorestframework-digestauth</a> - Provides Digest Access Authentication support.</li>
@@ -482,6 +494,7 @@
 <li><a href="https://github.com/ByteInternet/drf-oidc-auth">drf-oidc-auth</a> - Implements OpenID Connect token authentication for DRF.</li>
 <li><a href="https://github.com/aaronn/django-rest-framework-passwordless">drfpasswordless</a> - Adds (Medium, Square Cash inspired) passwordless logins and signups via email and mobile numbers.</li>
 <li><a href="https://github.com/celiao/django-rest-authemail">django-rest-authemail</a> - Provides a RESTful API for user signup and authentication using email addresses.</li>
+<li><a href="https://github.com/makinacorpus/django_pyoidc">dango-pyoidc</a> adds support for OpenID Connect (OIDC) authentication.</li>
 </ul>
 <h3 id="permissions"><a class="toclink" href="#permissions">Permissions</a></h3>
 <ul>
@@ -507,6 +520,7 @@
 <li><a href="https://github.com/oxan/djangorestframework-dataclasses">djangorestframework-dataclasses</a> - Serializer providing automatic field generation for Python dataclasses, like the built-in ModelSerializer does for models.</li>
 <li><a href="https://github.com/yezyilomo/django-restql">django-restql</a> - Turn your REST API into a GraphQL like API(It allows clients to control which fields will be sent in a response, uses GraphQL like syntax, supports read and write on both flat and nested fields).</li>
 <li><a href="https://github.com/PaulGilmartin/graph_wrap">graphwrap</a> - Transform your REST API into a fully compliant GraphQL API with just two lines of code. Leverages <a href="https://docs.graphene-python.org/projects/django/en/latest/">Graphene-Django</a> to dynamically build, at runtime, a GraphQL ObjectType for each view in your API.</li>
+<li><a href="https://github.com/khaledsukkar2/drf-shapeless-serializers">drf-shapeless-serializers</a> - Dynamically assemble, configure, and shape your Django Rest Framework serializers at runtime, much like connecting Lego bricks.</li>
 </ul>
 <h3 id="serializer-fields"><a class="toclink" href="#serializer-fields">Serializer fields</a></h3>
 <ul>
@@ -549,6 +563,7 @@
 </ul>
 <h3 id="misc"><a class="toclink" href="#misc">Misc</a></h3>
 <ul>
+<li><a href="https://github.com/amikrop/drf-sendables">drf-sendables</a> - User messages for Django REST Framework</li>
 <li><a href="https://github.com/agconti/cookiecutter-django-rest">cookiecutter-django-rest</a> - A cookiecutter template that takes care of the setup and configuration so you can focus on making your REST apis awesome.</li>
 <li><a href="https://github.com/fredkingham/django_rest_model_hyperlink_serializers_project">djangorestrelationalhyperlink</a> - A hyperlinked serializer that can can be used to alter relationships via hyperlinks, but otherwise like a hyperlink model serializer.</li>
 <li><a href="https://github.com/eofs/django-rest-framework-proxy">django-rest-framework-proxy</a> - Proxy to redirect incoming request to another API server.</li>
@@ -574,6 +589,13 @@
 <li><a href="https://github.com/iashraful/fast-drf">fast-drf</a> - A model based library for making API development faster and easier.</li>
 <li><a href="https://github.com/Raekkeri/django-requestlogs">django-requestlogs</a> - Providing middleware and other helpers for audit logging for REST framework.</li>
 <li><a href="https://github.com/ghazi-git/drf-standardized-errors">drf-standardized-errors</a> - DRF exception handler to standardize error responses for all API endpoints.</li>
+<li><a href="https://github.com/Ori-Roza/drf-api-action">drf-api-action</a> - uses the power of DRF also as a library functions</li>
+</ul>
+<h3 id="customization"><a class="toclink" href="#customization">Customization</a></h3>
+<ul>
+<li><a href="https://github.com/youzarsiph/drf-restwind">drf-restwind</a> - a modern re-imagining of the Django REST Framework utilizes TailwindCSS and DaisyUI to provide flexible and customizable UI solutions with minimal coding effort.</li>
+<li><a href="https://github.com/youzarsiph/drf-redesign">drf-redesign</a> - A project that gives a fresh look to the browse-able API using Bootstrap 5.</li>
+<li><a href="https://github.com/youzarsiph/drf-material">drf-material</a> - A project that gives a sleek and elegant look to the browsable API using Material Design.</li>
 </ul>
             
 

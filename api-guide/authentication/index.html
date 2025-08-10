@@ -239,10 +239,6 @@
                   </li>
                   
                   <li >
-                    <a href="../../topics/api-clients/">API Clients</a>
-                  </li>
-                  
-                  <li >
                     <a href="../../topics/internationalization/">Internationalization</a>
                   </li>
                   
@@ -291,6 +287,14 @@
                   
                   <li >
                     <a href="../../community/release-notes/">Release Notes</a>
+                  </li>
+                  
+                  <li >
+                    <a href="../../community/3.16-announcement/">3.16 Announcement</a>
+                  </li>
+                  
+                  <li >
+                    <a href="../../community/3.15-announcement/">3.15 Announcement</a>
                   </li>
                   
                   <li >
@@ -430,6 +434,10 @@
                     </li>
                   
                     <li>
+                      <a href="#django-51-loginrequiredmiddleware">Django 5.1+ LoginRequiredMiddleware</a>
+                    </li>
+                  
+                    <li>
                       <a href="#apache-mod_wsgi-specific-configuration">Apache mod_wsgi specific configuration</a>
                     </li>
                   
@@ -519,6 +527,10 @@
                       <a href="#django-rest-durin">Django-Rest-Durin</a>
                     </li>
                   
+                    <li>
+                      <a href="#django-pyoidc">django-pyoidc</a>
+                    </li>
+                  
                 
 
                   <div class="promo">
@@ -605,6 +617,9 @@ def example_view(request, format=None):
 <p>HTTP 401 responses must always include a <code>WWW-Authenticate</code> header, that instructs the client how to authenticate.  HTTP 403 responses do not include the <code>WWW-Authenticate</code> header.</p>
 <p>The kind of response that will be used depends on the authentication scheme.  Although multiple authentication schemes may be in use, only one scheme may be used to determine the type of response.  <strong>The first authentication class set on the view is used when determining the type of response</strong>.</p>
 <p>Note that when a request may successfully authenticate, but still be denied permission to perform the request, in which case a <code>403 Permission Denied</code> response will always be used, regardless of the authentication scheme.</p>
+<h2 id="django-51-loginrequiredmiddleware"><a class="toclink" href="#django-51-loginrequiredmiddleware">Django 5.1+ <code>LoginRequiredMiddleware</code></a></h2>
+<p>If you're running Django 5.1+ and use the <a href="https://docs.djangoproject.com/en/stable/ref/middleware/#django.contrib.auth.middleware.LoginRequiredMiddleware"><code>LoginRequiredMiddleware</code></a>, please note that all views from DRF are opted-out of this middleware.  This is because the authentication in DRF is based authentication and permissions classes, which may be determined after the middleware has been applied.  Additionally, when the request is not authenticated, the middleware redirects the user to the login page, which is not suitable for API requests, where it's preferable to return a 401 status code.</p>
+<p>REST framework offers an equivalent mechanism for DRF views via the global settings, <code>DEFAULT_AUTHENTICATION_CLASSES</code> and <code>DEFAULT_PERMISSION_CLASSES</code>.  They should be changed accordingly if you need to enforce that API requests are logged in.</p>
 <h2 id="apache-mod_wsgi-specific-configuration"><a class="toclink" href="#apache-mod_wsgi-specific-configuration">Apache mod_wsgi specific configuration</a></h2>
 <p>Note that if deploying to <a href="https://modwsgi.readthedocs.io/en/develop/configuration-directives/WSGIPassAuthorization.html">Apache using mod_wsgi</a>, the authorization header is not passed through to a WSGI application by default, as it is assumed that authentication will be handled by Apache, rather than at an application level.</p>
 <p>If you are deploying to Apache, and using any non-session based authentication, you will need to explicitly configure mod_wsgi to pass the required headers through to the application.  This can be done by specifying the <code>WSGIPassAuthorization</code> directive in the appropriate context and setting it to <code>'On'</code>.</p>
@@ -684,7 +699,7 @@ for user in User.objects.all():
     Token.objects.get_or_create(user=user)
 </code></pre>
 <h4 id="by-exposing-an-api-endpoint"><a class="toclink" href="#by-exposing-an-api-endpoint">By exposing an api endpoint</a></h4>
-<p>When using <code>TokenAuthentication</code>, you may want to provide a mechanism for clients to obtain a token given the username and password.  REST framework provides a built-in view to provide this behaviour.  To use it, add the <code>obtain_auth_token</code> view to your URLconf:</p>
+<p>When using <code>TokenAuthentication</code>, you may want to provide a mechanism for clients to obtain a token given the username and password.  REST framework provides a built-in view to provide this behavior.  To use it, add the <code>obtain_auth_token</code> view to your URLconf:</p>
 <pre><code>from rest_framework.authtoken import views
 urlpatterns += [
     path('api-token-auth/', views.obtain_auth_token)
@@ -695,7 +710,7 @@ urlpatterns += [
 <pre><code>{ 'token' : '9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b' }
 </code></pre>
 <p>Note that the default <code>obtain_auth_token</code> view explicitly uses JSON requests and responses, rather than using default renderer and parser classes in your settings.</p>
-<p>By default, there are no permissions or throttling applied to the  <code>obtain_auth_token</code> view. If you do wish to apply to throttle you'll need to override the view class,
+<p>By default, there are no permissions or throttling applied to the <code>obtain_auth_token</code> view. If you do wish to apply throttling you'll need to override the view class,
 and include them using the <code>throttle_classes</code> attribute.</p>
 <p>If you need a customized version of the <code>obtain_auth_token</code> view, you can do so by subclassing the <code>ObtainAuthToken</code> view class, and using that in your url conf instead.</p>
 <p>For example, you may return additional user information beyond the <code>token</code> value:</p>
@@ -723,7 +738,7 @@ class CustomAuthToken(ObtainAuthToken):
 ]
 </code></pre>
 <h4 id="with-django-admin"><a class="toclink" href="#with-django-admin">With Django admin</a></h4>
-<p>It is also possible to create Tokens manually through the admin interface. In case you are using a large user base, we recommend that you monkey patch the <code>TokenAdmin</code> class customize it to your needs, more specifically by declaring the <code>user</code> field as <code>raw_field</code>.</p>
+<p>It is also possible to create Tokens manually through the admin interface. In case you are using a large user base, we recommend that you monkey patch the <code>TokenAdmin</code> class to customize it to your needs, more specifically by declaring the <code>user</code> field as <code>raw_field</code>.</p>
 <p><code>your_app/admin.py</code>:</p>
 <pre><code>from rest_framework.authtoken.admin import TokenAdmin
 
@@ -747,22 +762,22 @@ TokenAdmin.raw_id_fields = ['user']
 <li><code>request.auth</code> will be <code>None</code>.</li>
 </ul>
 <p>Unauthenticated responses that are denied permission will result in an <code>HTTP 403 Forbidden</code> response.</p>
-<p>If you're using an AJAX-style API with SessionAuthentication, you'll need to make sure you include a valid CSRF token for any "unsafe" HTTP method calls, such as <code>PUT</code>, <code>PATCH</code>, <code>POST</code> or <code>DELETE</code> requests.  See the <a href="https://docs.djangoproject.com/en/stable/ref/csrf/#ajax">Django CSRF documentation</a> for more details.</p>
+<p>If you're using an AJAX-style API with SessionAuthentication, you'll need to make sure you include a valid CSRF token for any "unsafe" HTTP method calls, such as <code>PUT</code>, <code>PATCH</code>, <code>POST</code> or <code>DELETE</code> requests.  See the <a href="https://docs.djangoproject.com/en/stable/howto/csrf/#using-csrf-protection-with-ajax">Django CSRF documentation</a> for more details.</p>
 <p><strong>Warning</strong>: Always use Django's standard login view when creating login pages. This will ensure your login views are properly protected.</p>
-<p>CSRF validation in REST framework works slightly differently from standard Django due to the need to support both session and non-session based authentication to the same views. This means that only authenticated requests require CSRF tokens, and anonymous requests may be sent without CSRF tokens. This behaviour is not suitable for login views, which should always have CSRF validation applied.</p>
+<p>CSRF validation in REST framework works slightly differently from standard Django due to the need to support both session and non-session based authentication to the same views. This means that only authenticated requests require CSRF tokens, and anonymous requests may be sent without CSRF tokens. This behavior is not suitable for login views, which should always have CSRF validation applied.</p>
 <h2 id="remoteuserauthentication"><a class="toclink" href="#remoteuserauthentication">RemoteUserAuthentication</a></h2>
 <p>This authentication scheme allows you to delegate authentication to your web server, which sets the <code>REMOTE_USER</code>
 environment variable.</p>
 <p>To use it, you must have <code>django.contrib.auth.backends.RemoteUserBackend</code> (or a subclass) in your
 <code>AUTHENTICATION_BACKENDS</code> setting. By default, <code>RemoteUserBackend</code> creates <code>User</code> objects for usernames that don't
-already exist. To change this and other behaviour, consult the
+already exist. To change this and other behavior, consult the
 <a href="https://docs.djangoproject.com/en/stable/howto/auth-remote-user/">Django documentation</a>.</p>
 <p>If successfully authenticated, <code>RemoteUserAuthentication</code> provides the following credentials:</p>
 <ul>
 <li><code>request.user</code> will be a Django <code>User</code> instance.</li>
 <li><code>request.auth</code> will be <code>None</code>.</li>
 </ul>
-<p>Consult your web server's documentation for information about configuring an authentication method, e.g.:</p>
+<p>Consult your web server's documentation for information about configuring an authentication method, for example:</p>
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/howto/auth.html">Apache Authentication How-To</a></li>
 <li><a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/">NGINX (Restricting Access)</a></li>
@@ -836,9 +851,9 @@ REST_FRAMEWORK = {
 <h2 id="hawk-http-authentication"><a class="toclink" href="#hawk-http-authentication">Hawk HTTP Authentication</a></h2>
 <p>The <a href="https://hawkrest.readthedocs.io/en/latest/">HawkREST</a> library builds on the <a href="https://mohawk.readthedocs.io/en/latest/">Mohawk</a> library to let you work with <a href="https://github.com/hueniverse/hawk">Hawk</a> signed requests and responses in your API. <a href="https://github.com/hueniverse/hawk">Hawk</a> lets two parties securely communicate with each other using messages signed by a shared key. It is based on <a href="https://tools.ietf.org/html/draft-hammer-oauth-v2-mac-token-05">HTTP MAC access authentication</a> (which was based on parts of <a href="https://oauth.net/core/1.0a/">OAuth 1.0</a>).</p>
 <h2 id="http-signature-authentication"><a class="toclink" href="#http-signature-authentication">HTTP Signature Authentication</a></h2>
-<p>HTTP Signature (currently a <a href="https://datatracker.ietf.org/doc/draft-cavage-http-signatures/">IETF draft</a>) provides a way to achieve origin authentication and message integrity for HTTP messages. Similar to <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Amazon's HTTP Signature scheme</a>, used by many of its services, it permits stateless, per-request authentication. <a href="https://github.com/etoccalino/">Elvio Toccalino</a> maintains the <a href="https://github.com/etoccalino/django-rest-framework-httpsignature">djangorestframework-httpsignature</a> (outdated) package which provides an easy to use HTTP Signature Authentication mechanism. You can use the updated fork version of <a href="https://github.com/etoccalino/django-rest-framework-httpsignature">djangorestframework-httpsignature</a>, which is <a href="https://github.com/ahknight/drf-httpsig">drf-httpsig</a>.</p>
+<p>HTTP Signature (currently a <a href="https://datatracker.ietf.org/doc/draft-cavage-http-signatures/">IETF draft</a>) provides a way to achieve origin authentication and message integrity for HTTP messages. Similar to <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Amazon's HTTP Signature scheme</a>, used by many of its services, it permits stateless, per-request authentication. <a href="https://github.com/etoccalino/">Elvio Toccalino</a> maintains the <a href="https://github.com/etoccalino/django-rest-framework-httpsignature">djangorestframework-httpsignature</a> (outdated) package which provides an easy-to-use HTTP Signature Authentication mechanism. You can use the updated fork version of <a href="https://github.com/etoccalino/django-rest-framework-httpsignature">djangorestframework-httpsignature</a>, which is <a href="https://github.com/ahknight/drf-httpsig">drf-httpsig</a>.</p>
 <h2 id="djoser"><a class="toclink" href="#djoser">Djoser</a></h2>
-<p><a href="https://github.com/sunscrapers/djoser">Djoser</a> library provides a set of views to handle basic actions such as registration, login, logout, password reset and account activation. The package works with a custom user model and uses token-based authentication. This is ready to use REST implementation of the Django authentication system.</p>
+<p><a href="https://github.com/sunscrapers/djoser">Djoser</a> library provides a set of views to handle basic actions such as registration, login, logout, password reset and account activation. The package works with a custom user model and uses token-based authentication. This is a ready to use REST implementation of the Django authentication system.</p>
 <h2 id="django-rest-auth-dj-rest-auth"><a class="toclink" href="#django-rest-auth-dj-rest-auth">django-rest-auth / dj-rest-auth</a></h2>
 <p>This library provides a set of REST API endpoints for registration, authentication (including social media authentication), password reset, retrieve and update user details, etc. By having these API endpoints, your client apps such as AngularJS, iOS, Android, and others can communicate to your Django backend site independently via REST APIs for user management.</p>
 <p>There are currently two forks of this project.</p>
@@ -855,6 +870,10 @@ REST_FRAMEWORK = {
 <h2 id="django-rest-durin"><a class="toclink" href="#django-rest-durin">Django-Rest-Durin</a></h2>
 <p><a href="https://github.com/eshaan7/django-rest-durin">Django-Rest-Durin</a> is built with the idea to have one library that does token auth for multiple Web/CLI/Mobile API clients via one interface but allows different token configuration for each API Client that consumes the API. It provides support for multiple tokens per user via custom models, views, permissions that work with Django-Rest-Framework. The token expiration time can be different per API client and is customizable via the Django Admin Interface.</p>
 <p>More information can be found in the <a href="https://django-rest-durin.readthedocs.io/en/latest/index.html">Documentation</a>.</p>
+<h2 id="django-pyoidc"><a class="toclink" href="#django-pyoidc">django-pyoidc</a></h2>
+<p>[dango-pyoidc][django_pyoidc] adds support for OpenID Connect (OIDC) authentication. This allows you to delegate user management to an Identity Provider, which can be used to implement Single-Sign-On (SSO). It provides support for most uses-cases, such as customizing how token info are mapped to user models, using OIDC audiences for access control, etc.</p>
+<p>More information can be found in the <a href="https://django-pyoidc.readthedocs.io/latest/index.html">Documentation</a>.</p>
+<p>[django-pyoidc] : https://github.com/makinacorpus/django_pyoidc</p>
             
 
           </div> <!--/span-->
